@@ -32,10 +32,10 @@ namespace AuctionService.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("AuctionEnd")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp");
 
                     b.Property<int?>("CurrentHighBid")
                         .HasColumnType("integer");
@@ -54,7 +54,7 @@ namespace AuctionService.Migrations
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp");
 
                     b.Property<string>("Winner")
                         .IsRequired()

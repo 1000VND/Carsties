@@ -29,10 +29,10 @@ namespace AuctionService.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("AuctionEnd")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp");
 
                     b.Property<int?>("CurrentHighBid")
                         .HasColumnType("integer");
@@ -50,7 +50,7 @@ namespace AuctionService.Migrations
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp");
 
                     b.Property<string>("Winner")
                         .HasColumnType("text");
@@ -104,16 +104,16 @@ namespace AuctionService.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime?>("Consumed")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp");
 
                     b.Property<Guid>("ConsumerId")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime?>("Delivered")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp");
 
                     b.Property<DateTime?>("ExpirationTime")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp");
 
                     b.Property<long?>("LastSequenceNumber")
                         .HasColumnType("bigint");
@@ -128,7 +128,7 @@ namespace AuctionService.Migrations
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("Received")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp");
 
                     b.Property<byte[]>("RowVersion")
                         .IsConcurrencyToken()
@@ -172,10 +172,10 @@ namespace AuctionService.Migrations
                         .HasColumnType("character varying(256)");
 
                     b.Property<DateTime?>("EnqueueTime")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp");
 
                     b.Property<DateTime?>("ExpirationTime")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp");
 
                     b.Property<string>("FaultAddress")
                         .HasMaxLength(256)
@@ -214,7 +214,7 @@ namespace AuctionService.Migrations
                         .HasColumnType("character varying(256)");
 
                     b.Property<DateTime>("SentTime")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp");
 
                     b.Property<string>("SourceAddress")
                         .HasMaxLength(256)
@@ -242,10 +242,10 @@ namespace AuctionService.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp");
 
                     b.Property<DateTime?>("Delivered")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp");
 
                     b.Property<long?>("LastSequenceNumber")
                         .HasColumnType("bigint");

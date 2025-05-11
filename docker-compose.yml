@@ -1,28 +1,28 @@
-services:
-  postgres:
-    image: postgres
-    restart: always
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgrespw
-      - POSTGRES_DB=auctions
-    ports:
-      - 5432:5432
-    volumes:
-      - /var/lib/postgresql/data
+services:  # Khai báo phần dịch vụ trong Docker Compose
+  postgres:  # Định nghĩa dịch vụ PostgreSQL
+    image: postgres  # Sử dụng image chính thức của PostgreSQL
+    restart: always  # Tự động khởi động lại dịch vụ nếu nó dừng
+    environment:  # Khai báo các biến môi trường cho PostgreSQL
+      - POSTGRES_USER=postgres  # Tạo người dùng với tên 'postgres'
+      - POSTGRES_PASSWORD=postgrespw  # Đặt mật khẩu cho người dùng 'postgres'
+      - POSTGRES_DB=auctions  # Tạo cơ sở dữ liệu mặc định có tên 'auctions'
+    ports:  # Khai báo các cổng để ánh xạ
+      - 5432:5432  # Ánh xạ cổng 5432 của máy chủ đến cổng 5432 của container
+    volumes:  # Khai báo các volume để lưu trữ dữ liệu
+      - /var/lib/postgresql/data  # Đường dẫn lưu trữ dữ liệu của PostgreSQL
 
-  mongodb:
-    image: mongo
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=mongopw
-    ports:
-      - 27017:27017
-    volumes:
-      - /var/lib/mongodb/data
+  mongodb:  # Định nghĩa dịch vụ MongoDB
+    image: mongo  # Sử dụng image chính thức của MongoDB
+    environment:  # Khai báo các biến môi trường cho MongoDB
+      - MONGO_INITDB_ROOT_USERNAME=root  # Tạo người dùng root với tên 'root'
+      - MONGO_INITDB_ROOT_PASSWORD=mongopw  # Đặt mật khẩu cho người dùng root
+    ports:  # Khai báo các cổng để ánh xạ
+      - 27017:27017  # Ánh xạ cổng 27017 của máy chủ đến cổng 27017 của container
+    volumes:  # Khai báo các volume để lưu trữ dữ liệu
+      - /var/lib/mongodb/data  # Đường dẫn lưu trữ dữ liệu của MongoDB
   
-  rabbitmq:
-    image: rabbitmq:3-management-alpine
-    ports: 
-      - 5672:5672
-      - 15672:15672
+  rabbitmq:  # Định nghĩa dịch vụ RabbitMQ
+    image: rabbitmq:3-management-alpine  # Sử dụng image RabbitMQ với giao diện quản lý
+    ports:  # Khai báo các cổng để ánh xạ
+      - 5672:5672  # Ánh xạ cổng 5672 của máy chủ đến cổng 5672 của container
+      - 15672:15672  # Ánh xạ cổng 15672 của máy chủ đến cổng 15672 của container (giao diện quản lý)

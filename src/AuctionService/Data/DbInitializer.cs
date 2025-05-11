@@ -5,23 +5,33 @@ namespace AuctionService.Data
 {
     public class DbInitializer
     {
+        /// <summary>Phương thức khởi tạo và seed dữ liệu cho database khi ứng dụng khởi động</summary>
+        /// <param name="app">The application.</param>
+        /// Author: hunglq
+        /// Created: 5/9/2025
+        /// Modified: 5/9/2025 - hunglq - description
         public static void InitDb(WebApplication app)
         {
+            // Tạo một scope dịch vụ mới để lấy các service có scope lifetime (ví dụ DbContext)
             using var scope = app.Services.CreateScope();
 
+            // Lấy AuctionDbContext từ DI container và gọi hàm SeedData để seed dữ liệu mẫu
             SeedData(scope.ServiceProvider.GetService<AuctionDbContext>());
         }
 
         private static void SeedData(AuctionDbContext context)
         {
+            // Áp dụng các migration cho database nếu có (tạo hoặc cập nhật cấu trúc bảng)
             context.Database.Migrate();
 
+            // Kiểm tra nếu bảng Auctions đã có dữ liệu thì không seed nữa
             if (context.Auctions.Any())
             {
                 Console.WriteLine("Already have data - no need to seed");
                 return;
             }
 
+            #region Tạo danh sách các bản ghi Auction mẫu để seed vào database
             var auctions = new List<Auction>()
             {
                 // 1 Ford GT
@@ -31,7 +41,7 @@ namespace AuctionService.Data
                     Status = Status.Live,
                     ReservePrice = 20000,
                     Seller = "bob",
-                    AuctionEnd = DateTime.UtcNow.AddDays(10),
+                    AuctionEnd = DateTime.SpecifyKind(DateTime.Now.AddDays(10), DateTimeKind.Utc),
                     Item = new Item
                     {
                         Make = "Ford",
@@ -49,7 +59,7 @@ namespace AuctionService.Data
                     Status = Status.Live,
                     ReservePrice = 90000,
                     Seller = "alice",
-                    AuctionEnd = DateTime.UtcNow.AddDays(60),
+                    AuctionEnd = DateTime.SpecifyKind(DateTime.Now.AddDays(60), DateTimeKind.Utc),
                     Item = new Item
                     {
                         Make = "Bugatti",
@@ -66,7 +76,7 @@ namespace AuctionService.Data
                     Id = Guid.Parse("bbab4d5a-8565-48b1-9450-5ac2a5c4a654"),
                     Status = Status.Live,
                     Seller = "bob",
-                    AuctionEnd = DateTime.UtcNow.AddDays(4),
+                    AuctionEnd = DateTime.SpecifyKind(DateTime.Now.AddDays(4), DateTimeKind.Utc),
                     Item = new Item
                     {
                         Make = "Ford",
@@ -84,7 +94,7 @@ namespace AuctionService.Data
                     Status = Status.ReserveNotMet,
                     ReservePrice = 50000,
                     Seller = "tom",
-                    AuctionEnd = DateTime.UtcNow.AddDays(-10),
+                    AuctionEnd = DateTime.SpecifyKind(DateTime.Now.AddDays(-10), DateTimeKind.Utc),
                     Item = new Item
                     {
                         Make = "Mercedes",
@@ -102,7 +112,7 @@ namespace AuctionService.Data
                     Status = Status.Live,
                     ReservePrice = 20000,
                     Seller = "alice",
-                    AuctionEnd = DateTime.UtcNow.AddDays(30),
+                    AuctionEnd = DateTime.SpecifyKind(DateTime.Now.AddDays(30), DateTimeKind.Utc),
                     Item = new Item
                     {
                         Make = "BMW",
@@ -120,7 +130,7 @@ namespace AuctionService.Data
                     Status = Status.Live,
                     ReservePrice = 20000,
                     Seller = "bob",
-                    AuctionEnd = DateTime.UtcNow.AddDays(45),
+                    AuctionEnd = DateTime.SpecifyKind(DateTime.Now.AddDays(45), DateTimeKind.Utc),
                     Item = new Item
                     {
                         Make = "Ferrari",
@@ -138,7 +148,7 @@ namespace AuctionService.Data
                     Status = Status.Live,
                     ReservePrice = 150000,
                     Seller = "alice",
-                    AuctionEnd = DateTime.UtcNow.AddDays(13),
+                    AuctionEnd = DateTime.SpecifyKind(DateTime.Now.AddDays(13), DateTimeKind.Utc),
                     Item = new Item
                     {
                         Make = "Ferrari",
@@ -155,7 +165,7 @@ namespace AuctionService.Data
                     Id = Guid.Parse("6a5011a1-fe1f-47df-9a32-b5346b289391"),
                     Status = Status.Live,
                     Seller = "bob",
-                    AuctionEnd = DateTime.UtcNow.AddDays(19),
+                    AuctionEnd = DateTime.SpecifyKind(DateTime.Now.AddDays(19), DateTimeKind.Utc),
                     Item = new Item
                     {
                         Make = "Audi",
@@ -173,7 +183,7 @@ namespace AuctionService.Data
                     Status = Status.Live,
                     ReservePrice = 20000,
                     Seller = "tom",
-                    AuctionEnd = DateTime.UtcNow.AddDays(20),
+                    AuctionEnd = DateTime.SpecifyKind(DateTime.Now.AddDays(20), DateTimeKind.Utc),
                     Item = new Item
                     {
                         Make = "Audi",
@@ -191,7 +201,7 @@ namespace AuctionService.Data
                     Status = Status.Live,
                     ReservePrice = 20000,
                     Seller = "bob",
-                    AuctionEnd = DateTime.UtcNow.AddDays(48),
+                    AuctionEnd = DateTime.SpecifyKind(DateTime.Now.AddDays(48), DateTimeKind.Utc),
                     Item = new Item
                     {
                         Make = "Ford",
@@ -203,9 +213,12 @@ namespace AuctionService.Data
                     }
                 }
             };
+            #endregion
 
+            // Thêm các bản ghi Auction vào DbContext
             context.AddRange(auctions);
 
+            // Lưu các thay đổi vào database
             context.SaveChanges();
         }
     }

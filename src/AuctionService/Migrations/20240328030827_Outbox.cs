@@ -70,11 +70,11 @@ namespace AuctionService.Migrations
                     ConsumerId = table.Column<Guid>(type: "uuid", nullable: false),
                     LockId = table.Column<Guid>(type: "uuid", nullable: false),
                     RowVersion = table.Column<byte[]>(type: "bytea", rowVersion: true, nullable: true),
-                    Received = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Received = table.Column<DateTime>(type: "timestamp", nullable: false),
                     ReceiveCount = table.Column<int>(type: "integer", nullable: false),
-                    ExpirationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    Consumed = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    Delivered = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    ExpirationTime = table.Column<DateTime>(type: "timestamp", nullable: true),
+                    Consumed = table.Column<DateTime>(type: "timestamp", nullable: true),
+                    Delivered = table.Column<DateTime>(type: "timestamp", nullable: true),
                     LastSequenceNumber = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
@@ -89,8 +89,8 @@ namespace AuctionService.Migrations
                 {
                     SequenceNumber = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    EnqueueTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    SentTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    EnqueueTime = table.Column<DateTime>(type: "timestamp", nullable: true),
+                    SentTime = table.Column<DateTime>(type: "timestamp", nullable: false),
                     Headers = table.Column<string>(type: "text", nullable: true),
                     Properties = table.Column<string>(type: "text", nullable: true),
                     InboxMessageId = table.Column<Guid>(type: "uuid", nullable: true),
@@ -108,7 +108,7 @@ namespace AuctionService.Migrations
                     DestinationAddress = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     ResponseAddress = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     FaultAddress = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    ExpirationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                    ExpirationTime = table.Column<DateTime>(type: "timestamp", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -122,8 +122,8 @@ namespace AuctionService.Migrations
                     OutboxId = table.Column<Guid>(type: "uuid", nullable: false),
                     LockId = table.Column<Guid>(type: "uuid", nullable: false),
                     RowVersion = table.Column<byte[]>(type: "bytea", rowVersion: true, nullable: true),
-                    Created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Delivered = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    Created = table.Column<DateTime>(type: "timestamp", nullable: false),
+                    Delivered = table.Column<DateTime>(type: "timestamp", nullable: true),
                     LastSequenceNumber = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
